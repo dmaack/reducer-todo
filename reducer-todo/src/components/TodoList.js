@@ -2,22 +2,25 @@ import React from 'react';
 import Todo from './Todo';
 
 
-const TodoList = props => {
-
-    console.log('Todolist', props)
+const TodoList = ({todos, toggleCompleted}) => {
+    console.log(todos)
 
     return (
         <div>
             <h1>Todo List:</h1>
             <div>
-            {props.todoItem.map(item => (
+            {todos.map(todo => (
+            
+
                 <Todo 
-                    key={item.id}
-                    item={item}
-                    toggleComplete={props.dispatch}
+                    key={todo.id}
+                    todo={todo}
+                    toggleCompleted={toggleCompleted}
                 />
+                
             ))}
             </div>
+            
         </div>
     )
 }

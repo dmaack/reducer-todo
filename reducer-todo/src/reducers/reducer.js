@@ -17,25 +17,25 @@ export const initialState =  {
 export const reducer = (state, action) => {
     switch(action.type) {
         case 'ADD_TODO':
-            // console.log(state);
-           const newItem = {
-               item: action.payload,
-               completed: false,
-               id: Date.now()
-           }
-           return {
-               ...state,
-               todos: [...state.todos, newItem]
-           }
-
+          return {
+              ...state,
+              todos: [
+                  ...state.todos,
+                  {
+                      item: action.payload,
+                      completed: false,
+                      id: Date.now()
+                  }
+              ]
+            }
         case 'TOGGLE_COMPLETED':
             return {
                 ...state,
-                todos: state.todos.map(item => {
-                    if(item.id === action.payload) {
-                        return {...item, completed: ! item.completed}
+                todos: [state.todos].map(todo => {
+                    if(todo.id === action.payload) {
+                        return {...todo, completed: ! todo.completed}
                     } else {
-                        return item;
+                        return todo;
                     }
                 })
             }
@@ -43,8 +43,14 @@ export const reducer = (state, action) => {
         case 'CLEAR_COMPLETED': 
             return {
                 ...state,
-                todos: state.todos.filter(({completed}) => !completed)
+                todos: [...state.todos].filter(todo => !todo.completed)
             }
+            // case "CHANGE_ITEM":
+            //         return {
+                      
+            //           ...state,
+            //           item: action.payload
+            //         };
 
         default: 
                 return state;
