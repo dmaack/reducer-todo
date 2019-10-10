@@ -3,7 +3,7 @@ import Todo from './Todo';
 
 
 const TodoList = ({todos, toggleCompleted}) => {
-    console.log(todos)
+    console.log('these are the todos in my todoList', todos)
 
     return (
         <div>
@@ -13,9 +13,11 @@ const TodoList = ({todos, toggleCompleted}) => {
             
 
                 <Todo 
+                    id={todo.id}
                     key={todo.id}
                     todo={todo}
                     toggleCompleted={toggleCompleted}
+                    completed={todo.completed}
                 />
                 
             ))}

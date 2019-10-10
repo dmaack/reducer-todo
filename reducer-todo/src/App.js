@@ -9,16 +9,16 @@ import { initialState, reducer } from './reducers/reducer';
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-          console.log(state); //item, completed, id object
+          console.log(state); //item, completed, id  - object
 
           const addTodo = todo => {
-            console.log(todo)
-            dispatch({type: 'ADD_ITEM', payload: todo})
+            console.log('this is the new todo im adding',todo)
+            dispatch({type: 'ADD_TODO', payload: todo.item})
           } 
           
           const toggleCompleted = id => {
-            console.log(id)
-            dispatch({type: 'TOGGLE_ITEM', payload: id})
+            console.log('this is the id of the todo I mark as complete', id)
+            dispatch({type: 'TOGGLE_COMPLETED', payload: id})
           }
           
           const clearCompleted = id => {
@@ -26,9 +26,9 @@ const App = () => {
           }
 
           
-          // const handleChange = e => {
-          //   dispatch({type: 'CHANGE_ITEM', payload: e.target.value});
-          // }
+          const handleChange = e => {
+            dispatch({type: 'CHANGE_ITEM', payload: e.target.value});
+          }
 
     return (
       <div>
@@ -36,6 +36,7 @@ const App = () => {
       <div>
       <TodoForm 
         addTodo={addTodo}
+        handleChange={handleChange}
         clearCompleted={clearCompleted}
       />
       <TodoList 

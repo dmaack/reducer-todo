@@ -14,6 +14,9 @@ export const initialState =  {
 // toggle item
 // clear item
 
+//state= the current state
+//action= the action being dispatched 
+//return= should return the new state
 export const reducer = (state, action) => {
     switch(action.type) {
         case 'ADD_TODO':
@@ -30,10 +33,17 @@ export const reducer = (state, action) => {
             }
         case 'TOGGLE_COMPLETED':
             return {
+                //using map to keep function pure
+                //the function im passing as an argument will be called for every todo 
+                // if the todo is the one i want to toggle, im going to return a new object that has all the original properties (spread) and also an inverted value of the completed field
+                  //so if it's not the todo im looking for i dont want to change it so i want to return it as is
                 ...state,
-                todos: [state.todos].map(todo => {
+                todos: state.todos.map(todo => {
                     if(todo.id === action.payload) {
-                        return {...todo, completed: ! todo.completed}
+                        return {
+                            //returning a new object with ...todo
+                            ...todo, 
+                            completed: ! todo.completed}
                     } else {
                         return todo;
                     }
